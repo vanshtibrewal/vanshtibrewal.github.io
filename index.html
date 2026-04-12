@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link href="academicons.min.css" rel="stylesheet">
+    <link href="all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <meta name="author" content="Vansh Tibrewal">
+    <title>Vansh Tibrewal</title>
+    <script>
+        // Check for saved theme preference
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        // Initialize theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', initTheme);
+    </script>
+</head>
+
+<body>
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+    <div class="intro px-3 py-3 pt-md-5 pb-0 mx-auto">
+        <h1 class="display-6 text-center name">Vansh Tibrewal</h1>
+        <div class="d-flex flex-wrap bd-highlight mb-3 my-3 justify-content-center">
+            <div class="p-2 order-1 bd-highlight"><img class="img-thumbnail" src="images/prof_pic.jpg" alt="" width="240px">
+            </div><div class="intro-text order-2 p-2 my-1 bd-highlight text-left">
+                <p>I'm a senior at <a href="https://www.cms.caltech.edu/">Caltech</a> majoring in Computer Science. Currently, I am a member of Professor <a href="https://georgiagkioxari.com/">Georgia Gkioxari</a>'s lab at Caltech. Previously, I worked in Professor Pietro Perona's <a href="https://www.vision.caltech.edu/">Vision Lab</a> and before that in Professor Anima Anandkumar's <a href="https://tensorlab.cms.caltech.edu/users/anima/">AI + Science Lab</a>.
+                </p>
+                <p>Last summer, I was a Research Engineer Intern at Citadel on the Core Data team.
+                </p>
+                <p>I am interested in improving machine perception and visual generation capabilities with the ultimate goal of enabling AI in the physical world.
+                </p>
+                <p class="text-center social-icons"><a target="_blank" href="mailto:vtibrewa@caltech.edu"><i
+                            class="far fa-envelope"></i></a> <a
+                        target="_blank" href="data/Vansh_Tibrewal_CV.pdf"><i
+                            class="ai ai-cv"></i></a> <a
+                        target="_blank" href="https://scholar.google.com/citations?hl=en&user=y_NpJZYAAAAJ&view_op=list_works&sortby=pubdate"><i
+                            class="ai ai-google-scholar"></i></a> <a target="_blank"
+                        href="https://github.com/vanshtibrewal"><i class="fab fa-github"></i></a> <a target="_blank"
+                        href="https://x.com/vanshtibrewal"><i class="fab fa-twitter"></i></a> <a target="_blank"
+                        href="https://www.linkedin.com/in/vanshtibrewal"><i
+                            class="fab fa-linkedin"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle floating header on mobile
+        function handleFloatingHeader() {
+            const header = document.querySelector('.intro h1');
+            const socialIcons = document.querySelector('.social-icons');
+            const introSection = document.querySelector('.intro');
+            
+            // Only proceed if we're on mobile
+            if (window.innerWidth <= 768) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) {
+                            // Create floating header if it doesn't exist
+                            if (!document.querySelector('.floating-header')) {
+                                const floatingHeader = document.createElement('div');
+                                floatingHeader.className = 'floating-header';
+                                floatingHeader.innerHTML = `
+                                    <h1>Vansh Tibrewal</h1>
+                                    <div class="social-icons">
+                                        <a target="_blank" href="mailto:vtibrewa@caltech.edu"><i class="far fa-envelope"></i></a>
+                                        <a target="_blank" href="data/Vansh_Tibrewal_CV.pdf"><i class="ai ai-cv"></i></a>
+                                        <a target="_blank" href="https://scholar.google.com/citations?hl=en&user=y_NpJZYAAAAJ&view_op=list_works&sortby=pubdate"><i class="ai ai-google-scholar"></i></a>
+                                        <a target="_blank" href="https://github.com/vanshtibrewal"><i class="fab fa-github"></i></a>
+                                        <a target="_blank" href="https://x.com/vanshtibrewal"><i class="fab fa-twitter"></i></a>
+                                        <a target="_blank" href="https://www.linkedin.com/in/vanshtibrewal"><i class="fab fa-linkedin"></i></a>
+                                    </div>
+                                `;
+                                document.body.appendChild(floatingHeader);
+                                document.body.classList.add('floating-header-active');
+                            }
+                        } else {
+                            // Remove floating header if it exists
+                            const floatingHeader = document.querySelector('.floating-header');
+                            if (floatingHeader) {
+                                floatingHeader.remove();
+                                document.body.classList.remove('floating-header-active');
+                            }
+                        }
+                    });
+                }, { threshold: 0 });
+                
+                observer.observe(introSection);
+            } else {
+                // Always remove floating header on desktop
+                const floatingHeader = document.querySelector('.floating-header');
+                if (floatingHeader) {
+                    floatingHeader.remove();
+                    document.body.classList.remove('floating-header-active');
+                }
+            }
+        }
+
+        // Initialize theme and floating header
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            handleFloatingHeader();
+        });
+
+        // Update floating header on resize
+        window.addEventListener('resize', handleFloatingHeader);
+    </script>
+
+    <div class="container">
+        <!-- <a name="news"></a>
+        <h2 class="display-7 mb-1 text-center">News</h2>
+        <ul class="news-list mb-4">
+            <li><span class="news-date">[Feb. 2026]</span> Our paper on <a href="https://glab-caltech.github.io/kyvo/">aligning text, images, and 3D structure</a> was accepted to CVPR 2026!</li>
+            <li><span class="news-date">[Jun. 2025]</span> <a href="https://drive.google.com/file/d/14ZfaluJYvSNWDmgthDafj4LL4wS0N8cm/view?usp=sharing">Focus of Attention</a> nominated for Best Paper at CV4Smalls Workshop, CVPR 2026.</li>
+            <li><span class="news-date">[Summer 2024]</span> Research Engineer Intern at Citadel on the Core Data team.</li>
+            <li><span class="news-date">[Sep. 2022]</span> Started at <a href="https://www.cms.caltech.edu/">Caltech</a> majoring in Computer Science.</li>
+        </ul> -->
+
+        <a name="publications"></a>
+        <h2 class="display-7 mt-0 mb-3 text-center">Publications</h2>
+        <div class="card-deck mb-3">
+            <div class="card mb-2 shadow-sm">
+                <div class="card-body p-2 d-flex flex-wrap">
+                    <div class="teaser order-1 p-2 bd-highlight">
+                        <a target="_blank" href="https://glab-caltech.github.io/kyvo/">
+                            <img src="images/kyvo.png" alt="" width="100%">
+                        </a>
+                    </div>
+                    <div class="p-2 order-2 bd-highlight paper">
+                        <h4 class="my-0 mb-2 font-weight-normal">Aligning Text, Images, and 3D Structure Token-by-Token</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li><b>Vansh Tibrewal</b>*, <a href="https://aadsah.github.io/">Aadarsh Sahoo*</a>, <a href="https://georgiagkioxari.com/">Georgia Gkioxari</a></li>
+                            <li><i>CVPR 2026</i></li>
+                            <li class="mt-2"><a target="_blank" href="https://glab-caltech.github.io/kyvo/">project page</a> | <a target="_blank" href="https://arxiv.org/abs/2506.08002">arXiv</a> | <a target="_blank" href="https://github.com/AadSah/kyvo">code</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mb-3">
+            <div class="card mb-2 shadow-sm">
+                <div class="card-body p-2 d-flex flex-wrap">
+                    <div class="teaser order-1 p-2 bd-highlight">
+                        <a target="_blank" href="https://drive.google.com/file/d/1P_71DB4mql_JIDWQ0yEd93ZhnTP8Sv0f/view?usp=sharing">
+                            <img src="images/focus.png" alt="" width="100%">
+                        </a>
+                    </div>
+                    <div class="p-2 order-2 bd-highlight paper">
+                        <h4 class="my-0 mb-2 font-weight-normal">Focusing Attention in Self-Supervised Learning <br>for Action Recognition</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li><b>Vansh Tibrewal</b>, <a href="https://scholar.google.com/citations?user=KxfKqWkAAAAJ&hl=nl">Bart Thomson</a>, <a href="https://orcid.org/0000-0002-3057-0472">Michael Hugelshofer</a>, <a href="https://orcid.org/0000-0003-3696-6993">Henning Richter</a>, <a href="https://www.vision.caltech.edu/">Pietro Perona</a>, <a href="https://nkondapa.github.io/">Neehar Kondapaneni*</a>, <a href="https://damaggu.github.io/">Markus Marks*</a></li>
+                            <li><i>CVPRW 2026 <span class="achievement">["CV4Smalls" Best Paper Candidate]</span></i></li>
+                            <!-- <li><i>CV4Animals Workshop at CVPR 2025</i></li> -->
+                            <li class="mt-2"><a target="_blank" href="https://drive.google.com/file/d/1P_71DB4mql_JIDWQ0yEd93ZhnTP8Sv0f/view?usp=sharing">pdf</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mb-3">
+            <div class="card mb-2 shadow-sm">
+                <div class="card-body p-2 d-flex flex-wrap">
+                    <div class="teaser order-1 p-2 bd-highlight">
+                        <a target="_blank" href="data/plasma_poster.pdf">
+                            <img src="images/plasma.png" alt="" width="100%">
+                        </a>
+                        <a target="_blank" href="data/plasma_poster.pdf" style="display:block;text-align:center;">
+                            <img src="images/plasma_2.png" alt="" width="70%" style="margin-top:4px;">
+                        </a>
+                    </div>
+                    <div class="p-2 order-2 bd-highlight paper">
+                        <h4 class="my-0 mb-2 font-weight-normal">Using Machine Learning over Fast Camera Images to Classify the Plasma Confinement Mode within the MAST Experiment</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li><a href="https://www.researchgate.net/profile/Damian-Brennan">Daniel Brennand</a>, <b>Vansh Tibrewal</b>, <a href="https://vignesh-gopakumar.com/">Vignesh Gopakumar</a>, <a href="https://scholar.google.com/citations?user=s_OeaWQAAAAJ&hl=en">Stanislas Pamela</a>, <a href="https://zongyi-li.github.io/">Zongyi Li</a>, <a href="https://tensorlab.cms.caltech.edu/users/anima/">Anima Anandkumar</a>, <a href="https://www.ukaea.org/work/mast-upgrade/">The MAST team</a></li>
+                            <li><i>49th EPS Conference on Plasma Physics, 2023</i></li>
+                            <li class="mt-2"><a target="_blank" href="data/plasma_poster.pdf">poster</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
