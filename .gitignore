@@ -1,0 +1,12 @@
+# Plaintext sources for the protected pages.
+# NEVER commit these -- the repo is public and git history is forever.
+private_src/
+
+# Build tooling and config (kept local; back these up with private_src/)
+tools/
+.staticrypt.json
+
+# misc build artifacts
+encrypted/
+node_modules/
+.env
